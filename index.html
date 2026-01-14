@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axer - Gestión profesional para talleres de reparación</title>
     <meta name="description" content="Axer es la app de gestión para talleres de reparación de dispositivos móviles. Controla órdenes, clientes y cotizaciones desde tu iPhone.">
-    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="icon" type="image/png" href="./logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,6 +35,231 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
+        /* Screenshot frame */
+        .screenshot-placeholder {
+            /* sin estilos - solo contenedor */
+        }
+
+        /* Base animation states */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Stagger delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Hero animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .hero-badge {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-title {
+            opacity: 0;
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        .hero-subtitle {
+            opacity: 0;
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
+        .hero-phone {
+            opacity: 0;
+            animation: fadeInRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        }
+
+        .hero-phone .screenshot-placeholder {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .hero-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Button micro-interactions */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-primary:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Screenshot hover effect */
+        .screenshot-container {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .screenshot-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* List item animations */
+        .feature-item {
+            transition: transform 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-item .check-icon {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        background-color 0.3s ease;
+        }
+
+        .feature-item:hover .check-icon {
+            transform: scale(1.2);
+        }
+
+        /* Badge hover */
+        .section-badge {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header animation */
+        header {
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Nav links micro-interaction */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0D47A1;
+            transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Footer link hover */
+        .footer-link {
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-link:hover {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -44,338 +269,281 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="/" class="flex items-center">
-                    <img src="/logo.png" alt="Axer" class="h-8 w-auto">
+                    <img src="./logo.png" alt="Axer" class="h-8 w-auto">
                 </a>
                 <nav class="flex items-center gap-8">
-                    <a href="#features" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Funciones</a>
-                    <a href="/privacy" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacidad</a>
-                    <a href="/terms" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Términos</a>
+                    <a href="#features" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors">Funciones</a>
+                    <a href="/privacy" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacidad</a>
+                    <a href="/terms" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors">Términos</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-20 pb-24 md:pt-32 md:pb-32">
+    <section class="pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full mb-8">
-                    <span class="w-2 h-2 bg-primary rounded-full"></span>
-                    <span class="text-sm text-gray-700">Diseñado para talleres profesionales</span>
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Text Content -->
+                <div class="text-center lg:text-left">
+                    <div class="hero-badge inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full mb-8">
+                        <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                        <span class="text-sm text-gray-700">Disponible en App Store</span>
+                    </div>
+
+                    <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
+                        Gestiona tu taller de reparaciones
+                    </h1>
+
+                    <p class="hero-subtitle text-xl text-gray-600 mb-10 leading-relaxed">
+                        Control completo de órdenes, clientes y cotizaciones. Simple, rápido y profesional desde tu iPhone.
+                    </p>
+
+                    <a href="#" class="hero-cta btn-primary inline-flex items-center bg-black text-white px-6 py-3.5 rounded-xl">
+                        <svg class="w-7 h-7 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-xs opacity-75">Descargar en</div>
+                            <div class="text-base font-semibold">App Store</div>
+                        </div>
+                    </a>
                 </div>
 
-                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
-                    Gestiona tu taller de reparaciones
-                </h1>
-
-                <p class="text-xl text-gray-600 mb-12 leading-relaxed">
-                    Control completo de órdenes, clientes y cotizaciones.<br>
-                    Simple, rápido y profesional desde tu iPhone.
-                </p>
-
-                <a href="#" class="inline-flex items-center bg-black text-white px-6 py-3.5 rounded-xl hover:bg-gray-900 transition-colors">
-                    <svg class="w-7 h-7 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                    <div class="text-left">
-                        <div class="text-xs opacity-75">Descargar en</div>
-                        <div class="text-base font-semibold">App Store</div>
+                <!-- App Screenshot - Hero -->
+                <div class="hero-phone relative flex justify-center lg:justify-end">
+                    <div class="relative screenshot-container">
+                        <!-- iPhone Frame -->
+                        <div class="screenshot-placeholder max-w-[300px]">
+                            <!-- REEMPLAZAR: Captura del Dashboard principal -->
+                            <img src="./screenshots/hero-dashboard.png" alt="Dashboard de Axer" class="w-full h-auto">
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="hero-glow absolute -z-10 top-10 -right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+                        <div class="hero-glow absolute -z-10 -bottom-10 -left-10 w-48 h-48 bg-gray-200 rounded-full blur-2xl"></div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Feature 1: Órdenes de Reparación -->
     <section id="features" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="max-w-2xl mx-auto text-center mb-20">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-                    Todo lo esencial en una app
-                </h2>
-                <p class="text-lg text-gray-600">
-                    Las herramientas que necesitas para administrar tu taller de manera profesional
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <!-- Feature 1 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                        </svg>
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Screenshot Left -->
+                <div class="relative flex justify-center order-2 lg:order-1 animate-on-scroll-left">
+                    <div class="screenshot-container">
+                        <div class="screenshot-placeholder max-w-[280px]">
+                            <!-- REEMPLAZAR: Captura de lista de órdenes -->
+                            <img src="./screenshots/ordenes-lista.png" alt="Lista de órdenes en Axer" class="w-full h-auto">
+                        </div>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Órdenes de reparación</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Crea órdenes completas en minutos con información del cliente, dispositivo y diagnóstico
-                    </p>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                <!-- Text Right -->
+                <div class="order-1 lg:order-2 animate-on-scroll-right">
+                    <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded-full mb-6 cursor-default">
+                        <span class="text-sm font-medium text-gray-700">Órdenes</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Seguimiento de estados</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Flujo de trabajo claro con 7 estados desde que recibes hasta que entregas el dispositivo
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                        Todas tus órdenes en un solo lugar
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Crea órdenes completas en segundos. Captura información del cliente, dispositivo, diagnóstico y fotos del estado inicial. Todo organizado y fácil de encontrar.
                     </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Base de clientes</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Gestiona tu cartera de clientes con historial completo de reparaciones y búsqueda rápida
-                    </p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Cotizaciones profesionales</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Genera presupuestos detallados y compártelos por WhatsApp directamente desde la app
-                    </p>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Códigos QR e IMEI</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Escanea QR para acceder a órdenes y códigos de barras para capturar IMEI automáticamente
-                    </p>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-100">
-                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-5">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Colaboración en equipo</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Invita técnicos con roles diferenciados y mantén tu equipo sincronizado
-                    </p>
+                    <ul class="space-y-4">
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">7 estados de seguimiento</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Escaneo de IMEI con cámara</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Búsqueda y filtros rápidos</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Workflow Section -->
+    <!-- Feature 2: Detalle de Orden -->
     <section class="py-24">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="max-w-2xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-                    Flujo de trabajo optimizado
-                </h2>
-                <p class="text-lg text-gray-600">
-                    Siete estados que reflejan el proceso real de tu taller
-                </p>
-            </div>
-
-            <div class="relative">
-                <!-- Desktop Flow -->
-                <div class="hidden lg:flex items-center justify-between gap-3">
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">1</div>
-                            <span class="text-sm font-medium text-gray-900">Recibido</span>
-                        </div>
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text Left -->
+                <div class="animate-on-scroll-left">
+                    <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full mb-6 cursor-default">
+                        <span class="text-sm font-medium text-gray-700">Detalle</span>
                     </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">2</div>
-                            <span class="text-sm font-medium text-gray-900">Diagnóstico</span>
-                        </div>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">3</div>
-                            <span class="text-sm font-medium text-gray-900">Cotizado</span>
-                        </div>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">4</div>
-                            <span class="text-sm font-medium text-gray-900">Aprobado</span>
-                        </div>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">5</div>
-                            <span class="text-sm font-medium text-gray-900">Reparando</span>
-                        </div>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                            <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">6</div>
-                            <span class="text-sm font-medium text-gray-900">Listo</span>
-                        </div>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                    <div class="flex-1 text-center">
-                        <div class="inline-flex items-center gap-3 bg-primary text-white px-5 py-3 rounded-xl">
-                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-semibold">✓</div>
-                            <span class="text-sm font-medium">Entregado</span>
-                        </div>
-                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                        Toda la información que necesitas
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Visualiza cada orden con todos sus detalles: cliente, dispositivo, diagnóstico, cotización y estado. Actualiza el progreso con un tap y notifica al cliente por WhatsApp.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Historial de cambios</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Fotos del dispositivo</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Compartir por WhatsApp</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Mobile Flow -->
-                <div class="flex flex-col gap-4 lg:hidden">
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">1</div>
-                        <span class="text-sm font-medium text-gray-900">Recibido</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">2</div>
-                        <span class="text-sm font-medium text-gray-900">Diagnóstico</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">3</div>
-                        <span class="text-sm font-medium text-gray-900">Cotizado</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">4</div>
-                        <span class="text-sm font-medium text-gray-900">Aprobado</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">5</div>
-                        <span class="text-sm font-medium text-gray-900">En reparación</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-3 rounded-xl border border-gray-200">
-                        <div class="w-8 h-8 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-sm font-semibold">6</div>
-                        <span class="text-sm font-medium text-gray-900">Listo para entrega</span>
-                    </div>
-                    <div class="flex items-center gap-3 bg-primary text-white px-5 py-3 rounded-xl">
-                        <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-semibold">✓</div>
-                        <span class="text-sm font-medium">Entregado</span>
+                <!-- Screenshot Right -->
+                <div class="relative flex justify-center animate-on-scroll-right">
+                    <div class="screenshot-container">
+                        <div class="screenshot-placeholder max-w-[280px]">
+                            <!-- REEMPLAZAR: Captura de detalle de orden -->
+                            <img src="./screenshots/orden-detalle.png" alt="Detalle de orden en Axer" class="w-full h-auto">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Additional Features -->
+    <!-- Feature 3: Clientes -->
     <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6 tracking-tight">
-                        Pensado para tu día a día
-                    </h2>
-                    <p class="text-lg text-gray-600 mb-10">
-                        Herramientas adicionales que hacen tu trabajo más eficiente y profesional
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-6 h-6 bg-gray-900 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Tema oscuro automático</h4>
-                                <p class="text-gray-600">Protege tu vista trabajando en horarios nocturnos con modo oscuro completo</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-6 h-6 bg-gray-900 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Multiidioma completo</h4>
-                                <p class="text-gray-600">Interfaz disponible en español e inglés para adaptarse a tu región</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-6 h-6 bg-gray-900 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Integración con WhatsApp</h4>
-                                <p class="text-gray-600">Comparte cotizaciones y enlaces de seguimiento directamente por WhatsApp</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-6 h-6 bg-gray-900 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Documentación fotográfica</h4>
-                                <p class="text-gray-600">Captura el estado del dispositivo al recibirlo para proteger tu taller</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-6 h-6 bg-gray-900 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Accesibilidad total</h4>
-                                <p class="text-gray-600">Compatible con VoiceOver para usuarios con discapacidad visual</p>
-                            </div>
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Screenshot Left -->
+                <div class="relative flex justify-center order-2 lg:order-1 animate-on-scroll-left">
+                    <div class="screenshot-container">
+                        <div class="screenshot-placeholder max-w-[280px]">
+                            <!-- REEMPLAZAR: Captura de lista de clientes -->
+                            <img src="./screenshots/clientes.png" alt="Clientes en Axer" class="w-full h-auto">
                         </div>
                     </div>
                 </div>
-                <div class="bg-primary rounded-3xl p-10 lg:p-12 text-white">
-                    <h3 class="text-2xl font-bold mb-4">
-                        Dashboard con métricas en tiempo real
-                    </h3>
-                    <p class="text-white/80 mb-8 leading-relaxed">
-                        Visualiza el estado de tu taller de un vistazo: órdenes activas, ingresos del día y resumen mensual actualizado en tiempo real
+
+                <!-- Text Right -->
+                <div class="order-1 lg:order-2 animate-on-scroll-right">
+                    <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded-full mb-6 cursor-default">
+                        <span class="text-sm font-medium text-gray-700">Clientes</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                        Tu cartera de clientes organizada
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Gestiona todos tus clientes con su historial completo de reparaciones. Accede rápidamente a su información de contacto y órdenes anteriores.
                     </p>
-                    <div class="grid grid-cols-2 gap-5">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                            <div class="text-4xl font-bold mb-1">24</div>
-                            <div class="text-sm text-white/70">Órdenes activas</div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                            <div class="text-4xl font-bold mb-1">$3.2k</div>
-                            <div class="text-sm text-white/70">Aprobado hoy</div>
+                    <ul class="space-y-4">
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Historial de reparaciones</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Búsqueda instantánea</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Contacto directo por WhatsApp</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature 4: Cotizaciones -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text Left -->
+                <div class="animate-on-scroll-left">
+                    <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full mb-6 cursor-default">
+                        <span class="text-sm font-medium text-gray-700">Cotizaciones</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                        Presupuestos profesionales en segundos
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Crea cotizaciones detalladas con piezas y mano de obra. Envíalas directamente al cliente por WhatsApp y recibe su aprobación al instante.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Desglose de costos</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Envío por WhatsApp</span>
+                        </li>
+                        <li class="feature-item flex items-center gap-3">
+                            <div class="check-icon w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700">Aprobación del cliente</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Screenshot Right -->
+                <div class="relative flex justify-center animate-on-scroll-right">
+                    <div class="screenshot-container">
+                        <div class="screenshot-placeholder max-w-[280px]">
+                            <!-- REEMPLAZAR: Captura de cotización -->
+                            <img src="./screenshots/cotizacion.png" alt="Cotización en Axer" class="w-full h-auto">
                         </div>
                     </div>
                 </div>
@@ -384,15 +552,15 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center animate-on-scroll">
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
                 Comienza a usar Axer hoy
             </h2>
             <p class="text-xl text-gray-600 mb-10 leading-relaxed">
                 Descarga la app y transforma la gestión de tu taller de reparaciones
             </p>
-            <a href="#" class="inline-flex items-center bg-black text-white px-8 py-4 rounded-xl hover:bg-gray-900 transition-colors text-lg">
+            <a href="#" class="btn-primary inline-flex items-center bg-black text-white px-8 py-4 rounded-xl text-lg">
                 <svg class="w-7 h-7 mr-3" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                 </svg>
@@ -406,17 +574,49 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-8">
-                    <img src="/logo.png" alt="Axer" class="h-8 w-auto">
-                    <span class="text-sm text-gray-500">© 2026 Axer. Todos los derechos reservados.</span>
+                    <img src="./logo.png" alt="Axer" class="h-8 w-auto">
+                    <span class="text-sm text-gray-500">© 2025 Axer. Todos los derechos reservados.</span>
                 </div>
                 <nav class="flex gap-8">
-                    <a href="/privacy" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacidad</a>
-                    <a href="/terms" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Términos</a>
-                    <a href="mailto:soporte@axer.app" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Contacto</a>
+                    <a href="/privacy" class="footer-link text-sm text-gray-600 hover:text-gray-900">Privacidad</a>
+                    <a href="/terms" class="footer-link text-sm text-gray-600 hover:text-gray-900">Términos</a>
+                    <a href="mailto:soporte@axer.app" class="footer-link text-sm text-gray-600 hover:text-gray-900">Contacto</a>
                 </nav>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-left, .animate-on-scroll-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 
 </body>
 </html>
