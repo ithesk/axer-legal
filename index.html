@@ -473,6 +473,7 @@
                     id="ordenes-video"
                     muted
                     playsinline
+                    webkit-playsinline
                     loop
                     disablePictureInPicture
                     controlsList="nodownload nofullscreen noremoteplayback"
@@ -634,6 +635,7 @@
                             id="scroll-video"
                             muted
                             playsinline
+                    webkit-playsinline
                             loop
                             disablePictureInPicture
                             controlsList="nodownload nofullscreen noremoteplayback"
@@ -699,6 +701,7 @@
                     class="feature-video w-full h-auto block"
                     muted
                     playsinline
+                    webkit-playsinline
                     loop
                     disablePictureInPicture
                     controlsList="nodownload nofullscreen noremoteplayback"
@@ -734,6 +737,7 @@
                     class="feature-video w-full h-auto block rounded-3xl shadow-2xl"
                     muted
                     playsinline
+                    webkit-playsinline
                     loop
                     disablePictureInPicture
                     controlsList="nodownload nofullscreen noremoteplayback"
@@ -911,12 +915,18 @@
         });
 
         // All videos as visual canvas - Apple style
-        // No controls, no progress, just seamless animation
+        // iOS compatible autoplay
         const allVideos = document.querySelectorAll('video');
 
         allVideos.forEach(video => {
-            // Preload for smoother playback
+            // iOS requires these attributes to be set via JS too
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
             video.preload = 'auto';
+            video.load(); // Force reload with new attributes
 
             // Ensure seamless loop
             video.addEventListener('timeupdate', () => {
@@ -925,6 +935,22 @@
                 }
             });
         });
+
+        // Function to play video with iOS fallback
+        function playVideo(video) {
+            if (!video) return;
+
+            // Ensure muted for autoplay
+            video.muted = true;
+
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // iOS may need user interaction - try again on next touch
+                    console.log('Autoplay prevented, waiting for interaction');
+                });
+            }
+        }
 
         // Video observer - plays videos when in view
         const videoObserver = new IntersectionObserver((entries) => {
@@ -936,22 +962,41 @@
                         if (entry.target.classList.contains('scroll-video-wrapper')) {
                             entry.target.classList.add('visible');
                         }
-                        setTimeout(() => {
-                            video.play().catch(() => {});
-                        }, 200);
+                        playVideo(video);
                     } else {
                         video.pause();
                     }
                 }
             });
         }, {
-            threshold: 0.3,
-            rootMargin: '50px'
+            threshold: 0.2,
+            rootMargin: '100px'
         });
 
         // Observe video wrappers and direct videos
         document.querySelectorAll('.scroll-video-wrapper, .feature-video').forEach(el => {
             videoObserver.observe(el);
+        });
+
+        // iOS fallback: try to play videos on first user interaction
+        let hasInteracted = false;
+        const startVideosOnInteraction = () => {
+            if (hasInteracted) return;
+            hasInteracted = true;
+
+            allVideos.forEach(video => {
+                // Check if video is in viewport
+                const rect = video.getBoundingClientRect();
+                const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+                if (inViewport) {
+                    playVideo(video);
+                }
+            });
+        };
+
+        // Listen for first interaction
+        ['touchstart', 'click', 'scroll'].forEach(event => {
+            document.addEventListener(event, startVideosOnInteraction, { once: true, passive: true });
         });
     </script>
 
