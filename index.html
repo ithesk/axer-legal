@@ -664,27 +664,10 @@
     </section>
 
     <!-- Feature: Escaneo IMEI -->
-    <section class="bg-white">
-        <!-- Video - IMEI Scanner -->
-        <div class="relative overflow-hidden">
-            <div class="max-w-4xl mx-auto">
-                <video
-                    class="feature-video w-full h-auto block"
-                    muted
-                    playsinline
-                    loop
-                    disablePictureInPicture
-                    controlsList="nodownload nofullscreen noremoteplayback"
-                >
-                    <source src="./videos/imei-scanner.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style="background: linear-gradient(to top, white, transparent);"></div>
-        </div>
-
+    <section class="bg-white py-20">
         <!-- Content -->
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-            <div class="max-w-2xl mx-auto text-center animate-on-scroll">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto text-center mb-12 animate-on-scroll">
                 <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full mb-6 cursor-default">
                     <span class="text-sm font-medium text-gray-700">Escaneo IMEI</span>
                 </div>
@@ -694,6 +677,15 @@
                 <p class="text-lg text-gray-600 leading-relaxed">
                     Solo apunta la cámara al código de barras del dispositivo. Axer lee el IMEI automáticamente y lo registra en la orden. Sin escribir, sin errores.
                 </p>
+            </div>
+
+            <!-- Imagen iPad horizontal -->
+            <div class="animate-on-scroll delay-200">
+                <img
+                    src="./screenshots/imei-scanner-ipad.png"
+                    alt="Escaneo de IMEI en iPad"
+                    class="w-full h-auto block rounded-2xl shadow-2xl"
+                >
             </div>
         </div>
     </section>
@@ -734,12 +726,12 @@
     </section>
 
     <!-- Feature: Link de Seguimiento -->
-    <section class="bg-white">
-        <!-- Video - Tracking Link -->
-        <div class="relative overflow-hidden">
-            <div class="max-w-4xl mx-auto">
+    <section class="bg-white pt-16">
+        <!-- Video vertical - Tracking Link -->
+        <div class="relative overflow-hidden flex justify-center pb-8">
+            <div class="max-w-[300px]">
                 <video
-                    class="feature-video w-full h-auto block"
+                    class="feature-video w-full h-auto block rounded-3xl shadow-2xl"
                     muted
                     playsinline
                     loop
@@ -749,6 +741,7 @@
                     <source src="./videos/tracking-link.mp4" type="video/mp4">
                 </video>
             </div>
+            <!-- Gradiente para integrar con la página -->
             <div class="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style="background: linear-gradient(to top, white, transparent);"></div>
         </div>
 
@@ -769,57 +762,28 @@
     </section>
 
     <!-- Feature 3: Clientes -->
-    <section class="py-24 bg-gray-50">
+    <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <!-- Screenshot Left -->
-                <div class="relative flex justify-center order-2 lg:order-1 animate-on-scroll-left">
-                    <div class="screenshot-container">
-                        <div class="screenshot-placeholder max-w-[280px]">
-                            <!-- REEMPLAZAR: Captura de lista de clientes -->
-                            <img src="./screenshots/clientes.png" alt="Clientes en Axer" class="w-full h-auto">
-                        </div>
-                    </div>
+            <!-- Content -->
+            <div class="max-w-2xl mx-auto text-center mb-12 animate-on-scroll">
+                <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded-full mb-6 cursor-default">
+                    <span class="text-sm font-medium text-gray-700">Clientes</span>
                 </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+                    Tu cartera de clientes organizada
+                </h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Gestiona todos tus clientes con su historial completo de reparaciones. Accede rápidamente a su información de contacto y órdenes anteriores.
+                </p>
+            </div>
 
-                <!-- Text Right -->
-                <div class="order-1 lg:order-2 animate-on-scroll-right">
-                    <div class="section-badge inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded-full mb-6 cursor-default">
-                        <span class="text-sm font-medium text-gray-700">Clientes</span>
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
-                        Tu cartera de clientes organizada
-                    </h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        Gestiona todos tus clientes con su historial completo de reparaciones. Accede rápidamente a su información de contacto y órdenes anteriores.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="feature-item flex items-center gap-3">
-                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span class="text-gray-700">Historial de reparaciones</span>
-                        </li>
-                        <li class="feature-item flex items-center gap-3">
-                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span class="text-gray-700">Búsqueda instantánea</span>
-                        </li>
-                        <li class="feature-item flex items-center gap-3">
-                            <div class="check-icon w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span class="text-gray-700">Contacto directo por WhatsApp</span>
-                        </li>
-                    </ul>
-                </div>
+            <!-- Imagen iPad horizontal -->
+            <div class="animate-on-scroll delay-200">
+                <img
+                    src="./screenshots/clientes.png"
+                    alt="Gestión de clientes en iPad"
+                    class="w-full h-auto block rounded-2xl shadow-2xl"
+                >
             </div>
         </div>
     </section>
