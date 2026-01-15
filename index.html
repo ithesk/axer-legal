@@ -915,50 +915,73 @@
         });
 
         // All videos as visual canvas - Apple style
-        // iOS compatible autoplay
+        // iOS compatible autoplay - aggressive approach
         const allVideos = document.querySelectorAll('video');
 
-        allVideos.forEach(video => {
-            // iOS requires these attributes to be set via JS too
-            video.muted = true;
-            video.playsInline = true;
-            video.setAttribute('muted', '');
-            video.setAttribute('playsinline', '');
-            video.setAttribute('webkit-playsinline', '');
-            video.preload = 'auto';
-            video.load(); // Force reload with new attributes
-
-            // Ensure seamless loop
-            video.addEventListener('timeupdate', () => {
-                if (video.duration - video.currentTime < 0.1) {
-                    video.currentTime = 0;
-                }
-            });
-        });
-
-        // Function to play video with iOS fallback
+        // Function to play video
         function playVideo(video) {
             if (!video) return;
 
-            // Ensure muted for autoplay
             video.muted = true;
-
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // iOS may need user interaction - try again on next touch
-                    console.log('Autoplay prevented, waiting for interaction');
-                });
-            }
+            video.play().catch(() => {});
         }
 
-        // Video observer - plays videos when in view
+        // Function to check if element is in viewport
+        function isInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+        }
+
+        // Setup all videos
+        allVideos.forEach(video => {
+            video.muted = true;
+            video.playsInline = true;
+            video.autoplay = true;
+            video.loop = true;
+
+            // Try to play immediately if in viewport
+            if (isInViewport(video)) {
+                playVideo(video);
+            }
+        });
+
+        // Play videos on scroll
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    allVideos.forEach(video => {
+                        if (isInViewport(video)) {
+                            if (video.paused) playVideo(video);
+                        } else {
+                            video.pause();
+                        }
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // iOS: Play on any user interaction
+        const tryPlayAll = () => {
+            allVideos.forEach(video => {
+                if (isInViewport(video) && video.paused) {
+                    playVideo(video);
+                }
+            });
+        };
+
+        document.addEventListener('touchstart', tryPlayAll, { passive: true });
+        document.addEventListener('touchend', tryPlayAll, { passive: true });
+        document.addEventListener('click', tryPlayAll, { passive: true });
+
+        // Also observe with IntersectionObserver as backup
         const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                const video = entry.target.querySelector('video') || entry.target;
-                if (video.tagName === 'VIDEO') {
+                const video = entry.target.tagName === 'VIDEO' ? entry.target : entry.target.querySelector('video');
+                if (video) {
                     if (entry.isIntersecting) {
-                        // Add visible class if wrapper exists
                         if (entry.target.classList.contains('scroll-video-wrapper')) {
                             entry.target.classList.add('visible');
                         }
@@ -968,35 +991,10 @@
                     }
                 }
             });
-        }, {
-            threshold: 0.2,
-            rootMargin: '100px'
-        });
+        }, { threshold: 0.1 });
 
-        // Observe video wrappers and direct videos
         document.querySelectorAll('.scroll-video-wrapper, .feature-video').forEach(el => {
             videoObserver.observe(el);
-        });
-
-        // iOS fallback: try to play videos on first user interaction
-        let hasInteracted = false;
-        const startVideosOnInteraction = () => {
-            if (hasInteracted) return;
-            hasInteracted = true;
-
-            allVideos.forEach(video => {
-                // Check if video is in viewport
-                const rect = video.getBoundingClientRect();
-                const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
-                if (inViewport) {
-                    playVideo(video);
-                }
-            });
-        };
-
-        // Listen for first interaction
-        ['touchstart', 'click', 'scroll'].forEach(event => {
-            document.addEventListener(event, startVideosOnInteraction, { once: true, passive: true });
         });
     </script>
 
