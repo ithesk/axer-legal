@@ -3,7 +3,9 @@
   "outputDirectory": ".",
   "rewrites": [
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" }
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/privacy-en", "destination": "/privacy-en.html" },
+    { "source": "/terms-en", "destination": "/terms-en.html" }
   ],
   "headers": [
     {
